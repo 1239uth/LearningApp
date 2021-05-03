@@ -21,9 +21,19 @@ struct HomeView: View {
                         ForEach (model.modules) { module in
                             
                             VStack (spacing: 20) {
-                                NavigationLink(destination: ContentView(module: module)) {
-                                        HomeViewRow(image: module.content.image, title: module.category, description: module.content.description, count: module.content.lessons.count, time: module.content.time)
-                                    }
+                                // For bug....
+                                NavigationLink(
+                                    destination: EmptyView()) {}
+                                
+                                NavigationLink(destination: ContentView()
+                                                .onAppear {
+                                                    model.beginModule(module.id)
+                                                },
+                                               tag: module.id,
+                                               selection: $model.currentContentSelection)
+                                {
+                                    HomeViewRow(image: module.content.image, title: module.category, description: module.content.description, count: module.content.lessons.count, time: module.content.time)
+                                }
                                 
                                 NavigationLink(
                                     destination: Text("Quiz View")){
@@ -31,15 +41,15 @@ struct HomeView: View {
                                 }
                                 
                             }
-                            .accentColor(Color(.label))
                             
                         }
                         
                     }
+                    .accentColor(Color(.label))
                     .padding()
                 }
             }
-            .navigationTitle("Get Started")
+            .navigationBarTitle("Get Started")
         }
     }
 }

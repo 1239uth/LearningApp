@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var model: ContentModel
-    var module: Module
     
     var body: some View {
         ScrollView {
@@ -26,17 +25,14 @@ struct ContentView: View {
                         {
                             ContentViewRow(lessonIndex: lessonIndex)
                         }
-                        .accentColor(Color(.label))
                         
                     }
                 }
             }
+            .accentColor(Color(.label))
             .padding()
-            .navigationTitle("Learn \(module.category)")
+            .navigationBarTitle("Learn \(model.currentModule?.category ?? "")")
             
-        }
-        .onAppear {
-            model.beginModule(module.id)
         }
     }
 }

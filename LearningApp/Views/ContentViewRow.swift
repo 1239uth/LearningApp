@@ -20,7 +20,7 @@ struct ContentViewRow: View {
             RoundedRectangle(cornerRadius: 10)
                 .colorInvert()
                 .frame(height: 66)
-                .shadow(radius: 5)
+                .shadow(color: Color(.label), radius: 5)
             
             HStack {
                 

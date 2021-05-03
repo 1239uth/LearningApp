@@ -13,6 +13,7 @@
 		001A144E263FF8E600A48069 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001A144D263FF8E600A48069 /* AVKit.framework */; };
 		001A1450263FF9BC00A48069 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001A144F263FF9BC00A48069 /* Constants.swift */; };
 		001A14522640034A00A48069 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001A14512640034A00A48069 /* CodeTextView.swift */; };
+		001A145626400F0900A48069 /* RectangleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001A145526400F0900A48069 /* RectangleCard.swift */; };
 		0050B894263E57AF00B180B8 /* LearningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050B893263E57AF00B180B8 /* LearningApp.swift */; };
 		0050B896263E57AF00B180B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050B895263E57AF00B180B8 /* HomeView.swift */; };
 		0050B898263E57B100B180B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0050B897263E57B100B180B8 /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 		001A144D263FF8E600A48069 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		001A144F263FF9BC00A48069 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		001A14512640034A00A48069 /* CodeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
+		001A145526400F0900A48069 /* RectangleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleCard.swift; sourceTree = "<group>"; };
 		0050B890263E57AF00B180B8 /* LearningApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0050B893263E57AF00B180B8 /* LearningApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningApp.swift; sourceTree = "<group>"; };
 		0050B895263E57AF00B180B8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				001A1448263FEB0E00A48069 /* ContentViewRow.swift */,
 				001A144A263FF6E800A48069 /* ContentDetailView.swift */,
 				001A14512640034A00A48069 /* CodeTextView.swift */,
+				001A145526400F0900A48069 /* RectangleCard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				001A14522640034A00A48069 /* CodeTextView.swift in Sources */,
 				0050B8A8263E584C00B180B8 /* ContentModel.swift in Sources */,
 				0050B8AE263E5C4700B180B8 /* Models.swift in Sources */,
+				001A145626400F0900A48069 /* RectangleCard.swift in Sources */,
 				001A1450263FF9BC00A48069 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

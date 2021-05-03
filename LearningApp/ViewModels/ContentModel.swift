@@ -19,10 +19,13 @@ class ContentModel: ObservableObject {
     @Published var currentLesson: Lesson?
     var currentLessonIndex: Int = 0
     
-    var styleData: Data?
-    
     // Current Lesson Explanation
     @Published var lessonDescription = NSAttributedString()
+    
+    var styleData: Data?
+    
+    // Current selection content and test
+    @Published var currentContentSelection: Int?
     
     
     init () {
@@ -64,7 +67,7 @@ class ContentModel: ObservableObject {
         
     }
     
-    // MARK: Module navigation methods
+    // MARK: - Module navigation methods
     func beginModule(_ moduleID: Int) {
         
         for index in 0..<modules.count {
