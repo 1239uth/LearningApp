@@ -19,9 +19,14 @@ struct ContentView: View {
                 if model.currentModule != nil {
                     ForEach (0..<model.currentModule!.content.lessons.count) { lessonIndex in
                         
-                        NavigationLink(destination: ContentDetailView()) {
+                        NavigationLink(destination: ContentDetailView()
+                                        .onAppear {
+                                            model.beginLesson(lessonIndex)
+                                        })
+                        {
                             ContentViewRow(lessonIndex: lessonIndex)
                         }
+                        .accentColor(Color(.label))
                         
                     }
                 }

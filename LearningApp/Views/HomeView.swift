@@ -31,7 +31,7 @@ struct HomeView: View {
                                 }
                                 
                             }
-                            .accentColor(.black)
+                            .accentColor(Color(.label))
                             
                         }
                         
