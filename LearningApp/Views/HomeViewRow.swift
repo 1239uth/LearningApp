@@ -25,6 +25,9 @@ struct HomeViewRow: View {
                     .aspectRatio(CGSize(width: 335, height: 175), contentMode: .fit)
                 
                 HStack {
+                    
+                    Spacer()
+                    
                     Image(image)
                         .resizable()
                         .frame(width: 116, height: 116)
@@ -57,6 +60,8 @@ struct HomeViewRow: View {
                         }
                     }
                     .padding(.leading, 20)
+                    
+                    Spacer()
                 }
                 .padding(.horizontal)
                 
