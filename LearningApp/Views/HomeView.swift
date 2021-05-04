@@ -36,8 +36,13 @@ struct HomeView: View {
                                 }
                                 
                                 NavigationLink(
-                                    destination: Text("Quiz View")){
-                                    HomeViewRow(image: module.test.image, title: module.category, description: module.test.description, count: module.test.questions.count, time: module.test.time)
+                                    destination: TestView()
+                                        .onAppear {
+                                            model.beginTest(module.id)
+                                        },
+                                    tag: module.id,
+                                    selection: $model.currentTestSelection) {
+                                        HomeViewRow(image: module.test.image, title:   module.category, description: module.test.description, count: module.test.questions.count, time: module.test.time)
                                 }
                                 
                             }
