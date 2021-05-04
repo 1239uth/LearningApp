@@ -33,7 +33,7 @@ struct TestResultView: View {
                         .frame(height: 48)
                     Text("Complete")
                         .bold()
-                        .colorInvert()
+                        .foregroundColor(.white)
                 }
             }
             

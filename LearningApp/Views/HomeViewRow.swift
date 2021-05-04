@@ -21,7 +21,7 @@ struct HomeViewRow: View {
                 
                 RoundedRectangle(cornerRadius: 10)
                     .colorInvert()
-                    .shadow(color: Color(.label), radius: 7)
+                    .shadow(color: Color(.label), radius: 5)
                     .aspectRatio(CGSize(width: 335, height: 175), contentMode: .fit)
                 
                 HStack {

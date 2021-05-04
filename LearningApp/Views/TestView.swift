@@ -53,7 +53,9 @@ struct TestView: View {
                                     
                                     Text(model.currentQuestion!.answers[index])
                                         .bold()
+                                        .foregroundColor(.black)
                                 }
+                                .padding([.horizontal, .top], 2)
                             }
                             .disabled(submitted)
                         }
@@ -79,7 +81,7 @@ struct TestView: View {
                             .frame(height: 48)
                         Text(buttonText)
                             .bold()
-                            .colorInvert()
+                            .foregroundColor(.white)
                     }
                     .padding()
                     

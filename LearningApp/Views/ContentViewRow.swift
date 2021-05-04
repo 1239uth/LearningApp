@@ -27,11 +27,12 @@ struct ContentViewRow: View {
             RoundedRectangle(cornerRadius: 10)
                 .colorInvert()
                 .frame(height: 66)
-                .shadow(color: Color(.label), radius: 5)
+                .shadow(color: Color(.label), radius: 3)
             
             HStack {
                 
                 Text(String(lessonIndex+1))
+                    .bold()
                     .padding()
                 
                 VStack (alignment: .leading){
@@ -45,9 +46,3 @@ struct ContentViewRow: View {
         }
     }
 }
-
-//struct ContentViewRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentViewRow()
-//    }
-//}
