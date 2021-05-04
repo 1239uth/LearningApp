@@ -72,6 +72,7 @@ struct TestView: View {
                         selectedAnswerIndex = nil
                         model.nextQuestion()
                     }
+                    
                 }) {
                     ZStack {
                         RectangleCard(colour: .green)
@@ -84,6 +85,9 @@ struct TestView: View {
                     
                 }
                 .disabled(selectedAnswerIndex == nil)
+            }
+            else {
+                TestResultView(numCorrect: numCorrect)
             }
         }
         .accentColor(Color(.label))
