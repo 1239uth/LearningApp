@@ -13,7 +13,6 @@ struct ContentView: View {
     
     var body: some View {
         ScrollView {
-            
             LazyVStack (alignment: .leading) {
                 if model.currentModule != nil {
                     ForEach (0..<model.currentModule!.content.lessons.count) { lessonIndex in

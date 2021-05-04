@@ -34,10 +34,12 @@ class ContentModel: ObservableObject {
     
     init () {
         getLocalData()
+        
+        getRemoteData()
     }
     
     
-    // MARK: Data Methods
+    // MARK: - Data Methods
     func getLocalData() {
         
         let jsonUrl = Bundle.main.url(forResource: "data", withExtension: "json")
@@ -68,6 +70,37 @@ class ContentModel: ObservableObject {
         } catch {
             print(error)
         }
+        
+    }
+    
+    func getRemoteData() {
+        
+        let urlString = "https://1239uth.github.io/LearningApp-Data/data2.json"
+        let url = URL(string: urlString)
+        
+        guard url != nil else { return }
+        
+        let request = URLRequest(url: url!)
+        
+        let session = URLSession.shared
+        
+        session.dataTask(with: request) { (data, response, error) in
+            
+            guard error == nil else { return }
+            
+            do {
+                let modules = try JSONDecoder().decode([Module].self, from: data!)
+                
+                DispatchQueue.main.async {
+                    self.modules += modules
+                }
+                
+            } catch {
+                print("Couldn't parse json")
+            }
+        }.resume()
+        
+        // dataTask.resume() --> OPTIONAL
         
     }
     
