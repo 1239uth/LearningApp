@@ -22,6 +22,8 @@ struct CodeTextView: UIViewRepresentable {
         
         textView.attributedText = model.codeText
         
+        textView.backgroundColor = UIColor .white
+        
         textView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
         
     }

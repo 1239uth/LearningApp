@@ -35,8 +35,7 @@ struct ContentDetailView: View {
                         
                         Text("Next Lesson: \(model.currentModule!.content.lessons[model.currentLessonIndex+1].title)")
                             .bold()
-                            .foregroundColor(Color(.label))
-                            .colorInvert()
+                            .foregroundColor(.white)
                     }
                 })
             } else {
@@ -50,8 +49,7 @@ struct ContentDetailView: View {
                         
                         Text("Complete")
                             .bold()
-                            .foregroundColor(Color(.label))
-                            .colorInvert()
+                            .foregroundColor(.white)
                     }
                 })
             }
