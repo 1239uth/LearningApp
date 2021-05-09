@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import Firebase
 
 class ContentModel: ObservableObject {
+    
+    let db = Firestore.firestore()
     
     @Published var modules: [Module] = [Module]()
     
@@ -33,31 +36,140 @@ class ContentModel: ObservableObject {
     @Published var currentTestSelection: Int?
     
     init () {
-        getLocalData()
+        // Parse style.html
+        getLocalStyles()
         
-        getRemoteData()
+        getModules()
+        
+        // getRemoteData()
     }
     
-    
     // MARK: - Data Methods
-    func getLocalData() {
+    
+    func getLessons(module: Module, completion: @escaping () -> Void) {
         
-        let jsonUrl = Bundle.main.url(forResource: "data", withExtension: "json")
+        let collection = db.collection("modules").document(module.id).collection("lessons")
         
-        guard jsonUrl != nil else { return }
-        
-        do {
-            
-            let jsonData = try Data(contentsOf: jsonUrl!)
-            
-            let myModules = try JSONDecoder().decode([Module].self, from: jsonData)
-            
-            self.modules = myModules
-            
-        } catch {
-            print(error)
+        collection.getDocuments { querySnapshot, error in
+            if error == nil && querySnapshot != nil {
+                var lessons = [Lesson]()
+                
+                for document in querySnapshot!.documents {
+                    var l = Lesson()
+                    
+                    l.id = document["id"] as? String ?? UUID().uuidString
+                    l.duration = document["duration"] as? String ?? ""
+                    l.title = document["title"] as? String ?? ""
+                    l.video = document["video"] as? String ?? ""
+                    l.explanation = document["explanation"] as? String ?? ""
+                    
+                    lessons.append(l)
+                }
+                
+                for (index, m) in self.modules.enumerated() {
+                    if m.id == module.id {
+                        self.modules[index].content.lessons = lessons
+                        completion()
+                    }
+                }
+            }
         }
         
+    }
+    
+    func getQuestions(module: Module, completion: @escaping () -> Void) {
+        
+        let collection = db.collection("modules").document(module.id).collection("questions")
+        
+        collection.getDocuments { querySnapshot, error in
+            if error == nil && querySnapshot != nil {
+                var questions = [Question]()
+                
+                for document in querySnapshot!.documents {
+                    var q = Question()
+                    
+                    q.id = document["id"] as? String ?? UUID().uuidString
+                    q.content = document["content"] as? String ?? ""
+                    q.correctIndex = document["correctIndex"] as? Int ?? 0
+                    q.answers = document["answers"] as? [String] ?? [String]()
+                    
+                    questions.append(q)
+                }
+                
+                for (index, m) in self.modules.enumerated() {
+                    if m.id == module.id {
+                        self.modules[index].test.questions = questions
+                        completion()
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    func getModules() {
+        
+        let collection = db.collection("modules")
+        
+        collection.getDocuments { querySnapshot, error in
+            
+            if error == nil && querySnapshot != nil {
+                
+                var modules = [Module]()
+                
+                for document in querySnapshot!.documents {
+                    
+                    var m = Module()
+                    
+                    m.id = document["id"] as? String ?? UUID().uuidString
+                    m.category = document["category"] as? String ?? ""
+                    
+                    let contentMap = document["content"] as! [String:Any]
+                    
+                    m.content.id = contentMap["id"] as? String ?? ""
+                    m.content.description = contentMap["description"] as? String ?? ""
+                    m.content.image = contentMap["image"] as? String ?? ""
+                    m.content.time = contentMap["time"] as? String ?? ""
+                    
+                    let testMap = document["test"] as! [String:Any]
+                    
+                    m.test.id = testMap["id"] as? String ?? UUID().uuidString
+                    m.test.description = testMap["description"] as? String ?? ""
+                    m.test.image = testMap["image"] as? String ?? ""
+                    m.test.time = testMap["time"] as? String ?? ""
+                    
+                    modules.append(m)
+                    
+                }
+                
+                DispatchQueue.main.async {
+                    self.modules = modules
+                }
+            }
+        }
+        
+    }
+    
+    func getLocalStyles() {
+        
+//        let jsonUrl = Bundle.main.url(forResource: "data", withExtension: "json")
+//
+//        guard jsonUrl != nil else { return }
+//
+//        do {
+//
+//            let jsonData = try Data(contentsOf: jsonUrl!)
+//
+//            let myModules = try JSONDecoder().decode([Module].self, from: jsonData)
+//
+//            self.modules = myModules
+//
+//        } catch {
+//            print(error)
+//        }
+        
+        
+        // Parse style data
         let styleUrl = Bundle.main.url(forResource: "style", withExtension: "html")
         
         guard styleUrl != nil else {return}
@@ -105,7 +217,7 @@ class ContentModel: ObservableObject {
     }
     
     // MARK: - Module navigation methods
-    func beginModule(_ moduleID: Int) {
+    func beginModule(_ moduleID: String) {
         
         for index in 0..<modules.count {
             if modules[index].id == moduleID {
@@ -152,7 +264,7 @@ class ContentModel: ObservableObject {
     }
     
     
-    func beginTest(_ moduleID: Int) {
+    func beginTest(_ moduleID: String) {
         
         beginModule(moduleID)
         
